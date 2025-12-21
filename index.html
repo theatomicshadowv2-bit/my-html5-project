@@ -3,20 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NOIR — Elevated Monochrome</title>
+  <title>NOIR — Modern Monochrome Atelier</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <header class="header">
     <div class="logo">NOIR</div>
-    <nav>
+    <nav class="nav">
       <ul>
         <li><a href="#">Shop</a></li>
         <li><a href="#">Collections</a></li>
+        <li><a href="#">Atelier</a></li>
         <li><a href="#">Journal</a></li>
         <li><a href="#">Cart (0)</a></li>
       </ul>
@@ -26,65 +27,89 @@
   <main>
     <!-- Hero -->
     <section class="hero">
-      <div class="hero-background"></div>
+      <div class="hero-overlay"></div>
       <div class="hero-content">
-        <h1 class="animate-on-load">PURE FORM</h1>
-        <p class="animate-on-load delay-1">Timeless silhouettes. Monochrome elegance. Designed for the discerning.</p>
-        <a href="#" class="btn animate-on-load delay-2">Explore Collection</a>
+        <h1 class="reveal-title">ÉTINCELLE</h1>
+        <p class="reveal-text">Monochrome purity. Timeless craft. Absolute form.</p>
+        <div class="cta-group reveal-cta">
+          <a href="#" class="btn primary">Enter Atelier</a>
+          <a href="#" class="btn outline">View Collections</a>
+        </div>
       </div>
     </section>
 
-    <!-- Featured Section with Placeholders -->
-    <section class="featured">
-      <h2 class="section-title animate-on-scroll">New Arrivals</h2>
-      <div class="grid">
-        <div class="product-placeholder animate-on-scroll">
-          <div class="placeholder-image"></div>
-          <div class="product-info">
-            <h3>Signature Piece</h3>
-            <div class="price">$—</div>
+    <!-- Featured Collections -->
+    <section class="collections">
+      <div class="container">
+        <h2 class="section-heading reveal-heading">Current Atelier</h2>
+        <div class="grid-3 reveal-grid">
+          <div class="collection-card">
+            <div class="card-media"></div>
+            <div class="card-overlay">
+              <h3>Obsidian</h3>
+              <p>Structured outerwear in pure black wool</p>
+              <span class="price">From $580</span>
+            </div>
+          </div>
+
+          <div class="collection-card">
+            <div class="card-media"></div>
+            <div class="card-overlay">
+              <h3>Ivory</h3>
+              <p>Layered essentials in soft off-white</p>
+              <span class="price">From $320</span>
+            </div>
+          </div>
+
+          <div class="collection-card">
+            <div class="card-media"></div>
+            <div class="card-overlay">
+              <h3>Graphite</h3>
+              <p>Precision tailoring in deep charcoal</p>
+              <span class="price">From $420</span>
+            </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="product-placeholder animate-on-scroll delay-1">
-          <div class="placeholder-image"></div>
-          <div class="product-info">
-            <h3>Essential Layer</h3>
-            <div class="price">$—</div>
+    <!-- Philosophy -->
+    <section class="philosophy">
+      <div class="container">
+        <h2 class="section-heading reveal-heading">Our Craft</h2>
+        <div class="philosophy-grid">
+          <div class="philosophy-item reveal-item">
+            <h3>Form</h3>
+            <p>Sculptural silhouettes that transcend seasons.</p>
           </div>
-        </div>
-
-        <div class="product-placeholder animate-on-scroll delay-2">
-          <div class="placeholder-image"></div>
-          <div class="product-info">
-            <h3>Structured Form</h3>
-            <div class="price">$—</div>
+          <div class="philosophy-item reveal-item" style="transition-delay: 0.3s;">
+            <h3>Material</h3>
+            <p>Only the finest natural fibers and leathers.</p>
           </div>
-        </div>
-
-        <div class="product-placeholder animate-on-scroll delay-3">
-          <div class="placeholder-image"></div>
-          <div class="product-info">
-            <h3>Refined Detail</h3>
-            <div class="price">$—</div>
+          <div class="philosophy-item reveal-item" style="transition-delay: 0.6s;">
+            <h3>Intent</h3>
+            <p>Every detail deliberate, every stitch purposeful.</p>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer animate-on-scroll">
-    <p>© 2025 NOIR — All Rights Reserved</p>
+  <footer class="footer">
+    <div class="container">
+      <p>NOIR Atelier — Paris, 2025</p>
+      <p>All rights reserved.</p>
+    </div>
   </footer>
 
   <script>
     // Header scroll effect
     window.addEventListener('scroll', () => {
-      document.querySelector('.header').classList.toggle('scrolled', window.scrollY > 80);
+      document.querySelector('.header').classList.toggle('scrolled', window.scrollY > 120);
     });
 
-    // Scroll reveal observer
-    const observer = new IntersectionObserver((entries) => {
+    // Intersection Observer for reveals
+    const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
@@ -92,7 +117,9 @@
       });
     }, { threshold: 0.15 });
 
-    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal-title, .reveal-text, .reveal-cta, .reveal-heading, .reveal-grid, .reveal-item').forEach(el => {
+      revealObserver.observe(el);
+    });
   </script>
 </body>
 </html>

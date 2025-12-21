@@ -1,1 +1,104 @@
+<!-- cart.html -->
+<!-- ... same header (with active="Cart") and mobile menu ... -->
+<main>
+  <section class="section">
+    <h2 class="section-title animate-on-scroll">Your Cart</h2>
+    <div id="cart-items" class="grid"></div>
+    <div class="cart-summary animate-on-scroll">
+      <h3>Total: <span id="cart-total">$0</span></h3>
+      <button class="btn" id="checkout">Checkout</button>
+    </div>
 
+    <h2 class="section-title animate-on-scroll">Saved for Later</h2>
+    <div id="saved-items" class="grid"></div>
+  </section>
+</main>
+<!-- ... footer ... -->
+
+<script>
+  // Cart functionality
+  function loadCart() {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const saved = JSON.parse(localStorage.getItem('saved') || '[]');
+    const cartItems = document.getElementById('cart-items');
+    const savedItems = document.getElementById('saved-items');
+    const cartTotal = document.getElementById('cart-total');
+
+    cartItems.innerHTML = '';
+    savedItems.innerHTML = '';
+    let total = 0;
+
+    cart.forEach((item, index) => {
+      const card = createCartCard(item, index, false);
+      cartItems.appendChild(card);
+      total += item.price * item.quantity;
+    });
+
+    saved.forEach((item, index) => {
+      const card = createCartCard(item, index, true);
+      savedItems.appendChild(card);
+    });
+
+    cartTotal.textContent = `$${total.toFixed(2)}`;
+  }
+
+  function createCartCard(item, index, isSaved) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-image"></div>
+      <div class="card-content">
+        <h3>${item.name}</h3>
+        <p>${item.description}</p>
+        <div class="price">$${item.price}</div>
+        <div class="quantity">
+          Quantity: <input type="number" value="${item.quantity}" min="1" data-index="${index}" data-saved="${isSaved}">
+        </div>
+        <button class="btn remove" data-index="${index}" data-saved="${isSaved}">Remove</button>
+        <button class="btn save-later" data-index="${index}" data-saved="${isSaved}">${isSaved ? 'Move to Cart' : 'Save for Later'}</button>
+      </div>
+    `;
+    return card;
+  }
+
+  // Event listeners for remove, save/move, quantity change
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('remove')) {
+      const index = e.target.dataset.index;
+      const isSaved = e.target.dataset.saved === 'true';
+      let cart = JSON.parse(localStorage.getItem(isSaved ? 'saved' : 'cart') || '[]');
+      cart.splice(index, 1);
+      localStorage.setItem(isSaved ? 'saved' : 'cart', JSON.stringify(cart));
+      loadCart();
+    } else if (e.target.classList.contains('save-later')) {
+      const index = e.target.dataset.index;
+      const isSaved = e.target.dataset.saved === 'true';
+      let cart = JSON.parse(localStorage.getItem(isSaved ? 'saved' : 'cart') || '[]');
+      let saved = JSON.parse(localStorage.getItem(isSaved ? 'cart' : 'saved') || '[]');
+      const item = cart.splice(index, 1)[0];
+      saved.push(item);
+      localStorage.setItem(isSaved ? 'cart' : 'saved', JSON.stringify(cart));
+      localStorage.setItem(isSaved ? 'saved' : 'cart', JSON.stringify(saved));
+      loadCart();
+    }
+  });
+
+  document.addEventListener('change', (e) => {
+    if (e.target.type === 'number') {
+      const index = e.target.dataset.index;
+      const isSaved = e.target.dataset.saved === 'true';
+      let cart = JSON.parse(localStorage.getItem(isSaved ? 'saved' : 'cart') || '[]');
+      cart[index].quantity = parseInt(e.target.value) || 1;
+      localStorage.setItem(isSaved ? 'saved' : 'cart', JSON.stringify(cart));
+      loadCart();
+    }
+  });
+
+  document.getElementById('checkout').addEventListener('click', () => {
+    alert('Proceeding to checkout...');
+  });
+
+  loadCart();
+
+  // ... same header scroll, menu toggle, animations script ...
+</script>

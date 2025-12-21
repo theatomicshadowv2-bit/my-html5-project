@@ -3,91 +3,96 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NOIR — Minimal Black & White</title>
+  <title>NOIR — Elevated Monochrome</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <header>
+  <header class="header">
     <div class="logo">NOIR</div>
     <nav>
       <ul>
         <li><a href="#">Shop</a></li>
         <li><a href="#">Collections</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="#">Journal</a></li>
         <li><a href="#">Cart (0)</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
+    <!-- Hero -->
     <section class="hero">
-      <h1 class="animate-on-load">ESSENTIALS</h1>
-      <p class="animate-on-load delay-1">Timeless pieces in pure monochrome. Designed for those who appreciate clarity.</p>
-      <a href="#" class="btn animate-on-load delay-2">Shop Now</a>
+      <div class="hero-background"></div>
+      <div class="hero-content">
+        <h1 class="animate-on-load">PURE FORM</h1>
+        <p class="animate-on-load delay-1">Timeless silhouettes. Monochrome elegance. Designed for the discerning.</p>
+        <a href="#" class="btn animate-on-load delay-2">Explore Collection</a>
+      </div>
     </section>
 
-    <section class="products">
-      <h2 class="section-title animate-on-scroll">Featured</h2>
-
+    <!-- Featured Section with Placeholders -->
+    <section class="featured">
+      <h2 class="section-title animate-on-scroll">New Arrivals</h2>
       <div class="grid">
-        <div class="product-card animate-on-scroll">
-          <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c3e0b8?auto=format&fit=crop&w=800&q=80" alt="Black turtleneck sweater">
+        <div class="product-placeholder animate-on-scroll">
+          <div class="placeholder-image"></div>
           <div class="product-info">
-            <h3>Turtleneck Wool</h3>
-            <div class="price">$189</div>
+            <h3>Signature Piece</h3>
+            <div class="price">$—</div>
           </div>
         </div>
 
-        <div class="product-card animate-on-scroll delay-1">
-          <img src="https://images.unsplash.com/photo-1600185365926-3a6e0a3a8b8f?auto=format&fit=crop&w=800&q=80" alt="White oversized shirt">
+        <div class="product-placeholder animate-on-scroll delay-1">
+          <div class="placeholder-image"></div>
           <div class="product-info">
-            <h3>Oversized Shirt</h3>
-            <div class="price">$145</div>
+            <h3>Essential Layer</h3>
+            <div class="price">$—</div>
           </div>
         </div>
 
-        <div class="product-card animate-on-scroll delay-2">
-          <img src="https://images.unsplash.com/photo-1605733160316-4fc7a60a6b5c?auto=format&fit=crop&w=800&q=80" alt="Black tailored trousers">
+        <div class="product-placeholder animate-on-scroll delay-2">
+          <div class="placeholder-image"></div>
           <div class="product-info">
-            <h3>Tailored Trousers</h3>
-            <div class="price">$220</div>
+            <h3>Structured Form</h3>
+            <div class="price">$—</div>
           </div>
         </div>
 
-        <div class="product-card animate-on-scroll delay-3">
-          <img src="https://images.unsplash.com/photo-1621072156002-e2fccdc0d6f7?auto=format&fit=crop&w=800&q=80" alt="Minimal sneakers">
+        <div class="product-placeholder animate-on-scroll delay-3">
+          <div class="placeholder-image"></div>
           <div class="product-info">
-            <h3>Leather Sneakers</h3>
-            <div class="price">$295</div>
+            <h3>Refined Detail</h3>
+            <div class="price">$—</div>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <p>© 2025 NOIR. All rights reserved.</p>
+  <footer class="footer animate-on-scroll">
+    <p>© 2025 NOIR — All Rights Reserved</p>
   </footer>
 
   <script>
     // Header scroll effect
     window.addEventListener('scroll', () => {
-      document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50);
+      document.querySelector('.header').classList.toggle('scrolled', window.scrollY > 80);
     });
 
-    // Simple scroll observer for animations
+    // Scroll reveal observer
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.15 });
 
-    document.querySelectorAll('.animate-on-scroll').forEach(el => {
-      observer.observe(el);
-    });
+    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>

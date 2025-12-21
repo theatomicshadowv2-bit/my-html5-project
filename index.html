@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My HTML5 Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 40px;
+        }
+        main {
+            margin: 40px auto;
+            max-width: 800px;
+        }
+        canvas {
+            border: 2px solid #333;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to My HTML5 Site!</h1>
+        <p>Hosted directly on GitHub Pages</p>
+    </header>
+    
+    <main>
+        <p>This site was created entirely in the GitHub web editor.</p>
+        
+        <h2>HTML5 Features Demo</h2>
+        
+        <video controls width="600">
+            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm">
+            Your browser does not support HTML5 video.
+        </video>
+        
+        <h3>Canvas Example</h3>
+        <canvas id="myCanvas" width="400" height="200"></canvas>
+        
+        <script>
+            const canvas = document.getElementById('myCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Background
+            ctx.fillStyle = '#4CAF50';
+            ctx.fillRect(0, 0, 400, 200);
+            
+            // Text
+            ctx.fillStyle = 'white';
+            ctx.font = '30px Arial';
+            ctx.fillText('Hello from HTML5 Canvas!', 20, 100);
+            
+            // Simple shape
+            ctx.beginPath();
+            ctx.arc(300, 100, 50, 0, 2 * Math.PI);
+            ctx.fillStyle = 'yellow';
+            ctx.fill();
+        </script>
+    </main>
+</body>
+</html>

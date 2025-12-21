@@ -1,1 +1,87 @@
+/* style.css - with added CSS animations */
 
+/* ... (all previous CSS remains the same until the end) ... */
+
+/* Fade-in & slide-up animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-on-load {
+  opacity: 0;
+  animation: fadeInUp 1.2s ease-out forwards;
+}
+
+.delay-1 { animation-delay: 0.3s; }
+.delay-2 { animation-delay: 0.6s; }
+.delay-3 { animation-delay: 0.9s; }
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero text emphasis on load */
+.hero h1 {
+  animation: fadeInUp 1.4s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+/* Product card hover animation (enhanced) */
+.product-card {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.product-card:hover {
+  transform: translateY(-12px);
+}
+
+.product-card img {
+  transition: transform 0.7s ease, filter 0.7s ease;
+}
+
+.product-card:hover img {
+  transform: scale(1.12);
+  filter: grayscale(0%) contrast(115%) brightness(105%);
+}
+
+/* Button pulse subtle effect */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transition: left 0.6s ease;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .animate-on-scroll {
+    transform: translateY(40px);
+  }
+}

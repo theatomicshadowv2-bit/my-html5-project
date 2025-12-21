@@ -1,3 +1,41 @@
+<!-- index.html -->
+<!-- ... header and mobile menu ... -->
+<main>
+  <section class="hero"> <!-- Hero banner --> </section>
+  <section class="section" id="products">
+    <h2 class="section-title animate-on-scroll">Featured</h2>
+    <div class="grid">
+      <div class="card animate-on-scroll">
+        <div class="card-image"></div>
+        <div class="card-content">
+          <h3>Black Wool Coat</h3>
+          <p>Structured silhouette</p>
+          <div class="price">$480</div>
+          <button class="btn add-to-cart" data-name="Black Wool Coat" data-description="Structured silhouette" data-price="480">Add to Cart</button>
+        </div>
+      </div>
+      <!-- Repeat for other products -->
+    </div>
+  </section>
+</main>
+<!-- ... footer ... -->
+
+<script>
+  // Add-to-cart functionality
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('add-to-cart')) {
+      const item = {
+        name: e.target.dataset.name,
+        description: e.target.dataset.description,
+        price: parseFloat(e.target.dataset.price),
+        quantity: 1
+      };
+      let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      cart.push(item);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert('Added to cart!');
+    }
+  });
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,3 +121,4 @@
   </script>
 </body>
 </html>
+</script>

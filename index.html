@@ -4,234 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NOIR — Minimal Black & White</title>
-  <style>
-    :root {
-      --bg: #000000;
-      --text: #ffffff;
-      --text-muted: #cccccc;
-      --accent: #ffffff;
-      --border: #333333;
-      --hover: #555555;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* Header / Navigation */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      padding: 2rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(0,0,0,0.65);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      transition: background 0.4s ease;
-    }
-
-    header.scrolled {
-      background: rgba(0,0,0,0.85);
-    }
-
-    .logo {
-      font-size: 1.6rem;
-      font-weight: 900;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 3rem;
-    }
-
-    nav a {
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-size: 0.95rem;
-      position: relative;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: var(--accent);
-    }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 1px;
-      bottom: -6px;
-      left: 0;
-      background: var(--accent);
-      transition: width 0.4s ease;
-    }
-
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    /* Hero */
-    .hero {
-      height: 100vh;
-      min-height: 800px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 5%;
-      position: relative;
-    }
-
-    .hero h1 {
-      font-size: clamp(4rem, 12vw, 10rem);
-      font-weight: 900;
-      letter-spacing: -0.05em;
-      line-height: 0.9;
-      margin-bottom: 1.5rem;
-      text-transform: uppercase;
-    }
-
-    .hero p {
-      font-size: 1.4rem;
-      max-width: 600px;
-      color: var(--text-muted);
-      margin-bottom: 3rem;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 1rem 2.5rem;
-      border: 1px solid var(--text);
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      transition: all 0.4s ease;
-      background: transparent;
-      cursor: pointer;
-    }
-
-    .btn:hover {
-      background: var(--text);
-      color: var(--bg);
-    }
-
-    /* Products Grid */
-    .products {
-      padding: 12rem 5% 8rem;
-      max-width: 1800px;
-      margin: 0 auto;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 3.5rem;
-      font-weight: 900;
-      margin-bottom: 5rem;
-      letter-spacing: -0.03em;
-      text-transform: uppercase;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 4rem;
-    }
-
-    .product-card {
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-    }
-
-    .product-card img {
-      width: 100%;
-      height: auto;
-      display: block;
-      filter: grayscale(100%) contrast(120%);
-      transition: transform 0.6s ease, filter 0.6s ease;
-    }
-
-    .product-card:hover img {
-      transform: scale(1.08);
-      filter: grayscale(0%) contrast(110%);
-    }
-
-    .product-info {
-      padding: 1.5rem 0;
-      text-align: center;
-    }
-
-    .product-info h3 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 0.6rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .price {
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: var(--text-muted);
-    }
-
-    /* Footer */
-    footer {
-      padding: 6rem 5% 3rem;
-      text-align: center;
-      border-top: 1px solid var(--border);
-    }
-
-    footer p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      letter-spacing: 0.1em;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      header {
-        padding: 1.5rem 5%;
-      }
-
-      nav ul {
-        gap: 1.5rem;
-      }
-
-      .hero h1 {
-        font-size: 6rem;
-      }
-
-      .products {
-        padding: 8rem 5% 6rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -249,16 +22,16 @@
 
   <main>
     <section class="hero">
-      <h1>ESSENTIALS</h1>
-      <p>Timeless pieces in pure monochrome. Designed for those who appreciate clarity.</p>
-      <a href="#" class="btn">Shop Now</a>
+      <h1 class="animate-on-load">ESSENTIALS</h1>
+      <p class="animate-on-load delay-1">Timeless pieces in pure monochrome. Designed for those who appreciate clarity.</p>
+      <a href="#" class="btn animate-on-load delay-2">Shop Now</a>
     </section>
 
     <section class="products">
-      <h2 class="section-title">Featured</h2>
+      <h2 class="section-title animate-on-scroll">Featured</h2>
 
       <div class="grid">
-        <div class="product-card">
+        <div class="product-card animate-on-scroll">
           <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c3e0b8?auto=format&fit=crop&w=800&q=80" alt="Black turtleneck sweater">
           <div class="product-info">
             <h3>Turtleneck Wool</h3>
@@ -266,7 +39,7 @@
           </div>
         </div>
 
-        <div class="product-card">
+        <div class="product-card animate-on-scroll delay-1">
           <img src="https://images.unsplash.com/photo-1600185365926-3a6e0a3a8b8f?auto=format&fit=crop&w=800&q=80" alt="White oversized shirt">
           <div class="product-info">
             <h3>Oversized Shirt</h3>
@@ -274,7 +47,7 @@
           </div>
         </div>
 
-        <div class="product-card">
+        <div class="product-card animate-on-scroll delay-2">
           <img src="https://images.unsplash.com/photo-1605733160316-4fc7a60a6b5c?auto=format&fit=crop&w=800&q=80" alt="Black tailored trousers">
           <div class="product-info">
             <h3>Tailored Trousers</h3>
@@ -282,7 +55,7 @@
           </div>
         </div>
 
-        <div class="product-card">
+        <div class="product-card animate-on-scroll delay-3">
           <img src="https://images.unsplash.com/photo-1621072156002-e2fccdc0d6f7?auto=format&fit=crop&w=800&q=80" alt="Minimal sneakers">
           <div class="product-info">
             <h3>Leather Sneakers</h3>
@@ -298,9 +71,22 @@
   </footer>
 
   <script>
-    // Simple scroll effect for header
+    // Header scroll effect
     window.addEventListener('scroll', () => {
       document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Simple scroll observer for animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
     });
   </script>
 </body>

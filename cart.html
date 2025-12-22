@@ -7,8 +7,8 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-//force redeploy
-  <!-- HEADER - with "Cart" active -->
+
+  <!-- HEADER -->
   <header>
     <div class="logo">NOIR</div>
     <button class="menu-toggle" aria-label="Open menu">☰</button>
@@ -50,7 +50,10 @@
   <footer>
     <p>© 2025 NOIR — All Rights Reserved</p>
   </footer>
-<div id="toast" class="toast">Added to cart!</div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">Added to cart!</div>
+
   <script>
     // Update cart count in header on every page
     function updateCartCount() {
@@ -110,8 +113,6 @@
       });
 
       cartTotal.textContent = `$${total.toFixed(2)}`;
-
-      // Update header cart count after loading
       updateCartCount();
     }
 
@@ -125,7 +126,9 @@
           <p>${item.description}</p>
           <div class="price">$${item.price}</div>
           <div class="quantity">
-            Quantity: <input type="number" value="${item.quantity}" min="1" data-index="${index}" data-saved="${isSaved}">
+            <button class="qty-btn minus" data-index="${index}" data-saved="${isSaved}">-</button>
+            <span class="qty-number">${item.quantity}</span>
+            <button class="qty-btn plus" data-index="${index}" data-saved="${isSaved}">+</button>
           </div>
           <button class="btn remove" data-index="${index}" data-saved="${isSaved}">Remove</button>
           <button class="btn save-later" data-index="${index}" data-saved="${isSaved}">${isSaved ? 'Move to Cart' : 'Save for Later'}</button>
@@ -134,7 +137,7 @@
       return card;
     }
 
-    // Event listeners for remove, save/move, quantity change
+    // Event listeners for remove, save/move
     document.addEventListener('click', (e) => {
       if (e.target.classList.contains('remove')) {
         const index = e.target.dataset.index;
@@ -153,15 +156,17 @@
         localStorage.setItem(isSaved ? 'cart' : 'saved', JSON.stringify(cart));
         localStorage.setItem(isSaved ? 'saved' : 'cart', JSON.stringify(saved));
         loadCart();
-      }
-    });
-
-    document.addEventListener('change', (e) => {
-      if (e.target.type === 'number') {
+      } else if (e.target.classList.contains('qty-btn')) {
         const index = e.target.dataset.index;
         const isSaved = e.target.dataset.saved === 'true';
+        const action = e.target.classList.contains('plus') ? 'plus' : 'minus';
+
         let cart = JSON.parse(localStorage.getItem(isSaved ? 'saved' : 'cart') || '[]');
-        cart[index].quantity = parseInt(e.target.value) || 1;
+        if (action === 'plus') {
+          cart[index].quantity += 1;
+        } else if (action === 'minus' && cart[index].quantity > 1) {
+          cart[index].quantity -= 1;
+        }
         localStorage.setItem(isSaved ? 'saved' : 'cart', JSON.stringify(cart));
         loadCart();
       }

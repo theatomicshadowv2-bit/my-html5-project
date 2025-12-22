@@ -1,31 +1,92 @@
-<!-- atelier.html -->
-<!-- ... same header (with active="Atelier") and mobile menu ... -->
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NOIR — Shop</title>
-  
-  <!-- This line links the CSS file -->
+  <title>NOIR — Atelier</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<main>
-  <section class="hero">
-    <h1>Our Atelier</h1>
-    <p>Where craftsmanship meets innovation</p>
-  </section>
-  <section class="section">
-    <h2 class="section-title animate-on-scroll">The Workshop</h2>
-    <p class="animate-on-scroll">NOIR's atelier is a sanctuary of precision and artistry...</p>
-    <div class="grid">
-      <div class="card animate-on-scroll">
-        <div class="card-image"></div>
-        <div class="card-content">
-          <h3>Craftsmanship</h3>
-          <p>Hand-stitched details and premium materials</p>
+<body>
+
+  <!-- HEADER - this is what was missing! -->
+  <header>
+    <div class="logo">NOIR</div>
+    <button class="menu-toggle" aria-label="Open menu">☰</button>
+    <nav class="nav-desktop">
+      <a href="index.html">Shop</a>
+      <a href="collections.html">Collections</a>
+      <a href="atelier.html" class="active">Atelier</a>
+      <a href="journal.html">Journal</a>
+      <a href="cart.html">Cart (0)</a>
+    </nav>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <nav class="nav-mobile" id="navMenu">
+    <button class="close-menu" aria-label="Close menu">×</button>
+    <ul>
+      <li><a href="index.html">Shop</a></li>
+      <li><a href="collections.html">Collections</a></li>
+      <li><a href="atelier.html">Atelier</a></li>
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="cart.html">Cart (0)</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1>Our Atelier</h1>
+      <p>Where craftsmanship meets innovation</p>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title animate-on-scroll">The Workshop</h2>
+      <p class="animate-on-scroll">NOIR's atelier is a sanctuary of precision and artistry, nestled in the heart of Paris. Here, master artisans blend traditional techniques with modern technology to create our signature monochrome pieces.</p>
+      <div class="grid">
+        <div class="card animate-on-scroll">
+          <div class="card-image"></div>
+          <div class="card-content">
+            <h3>Craftsmanship</h3>
+            <p>Hand-stitched details and premium materials</p>
+          </div>
+        </div>
+        <div class="card animate-on-scroll">
+          <div class="card-image"></div>
+          <div class="card-content">
+            <h3>Innovation</h3>
+            <p>Sustainable fabrics and cutting-edge design</p>
+          </div>
         </div>
       </div>
-      <!-- more cards -->
-    </div>
-  </section>
-</main>
-<!-- ... footer + same script as index.html (no cart code) ... -->
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 NOIR — All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      document.querySelector('header').classList.toggle('scrolled', window.scrollY > 100);
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('#navMenu');
+    const closeMenu = document.querySelector('.close-menu');
+
+    menuToggle.addEventListener('click', () => navMenu.classList.add('active'));
+    closeMenu.addEventListener('click', () => navMenu.classList.remove('active'));
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

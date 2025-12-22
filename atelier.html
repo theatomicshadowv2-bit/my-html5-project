@@ -65,7 +65,7 @@
   <footer>
     <p>© 2025 NOIR — All Rights Reserved</p>
   </footer>
-
+  <div id="toast" class="toast">Added to cart!</div>
   <script>
     // Update cart count in header on every page
     function updateCartCount() {
@@ -100,6 +100,38 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+    // Add-to-cart functionality with sliding toast
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('add-to-cart')) {
+    const item = {
+      name: e.target.dataset.name,
+      description: e.target.dataset.description,
+      price: parseFloat(e.target.dataset.price),
+      quantity: 1
+    };
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    cart.push(item);
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Show the sliding toast
+    showToast();
+
+    updateCartCount(); // Update header cart count
+  }
+});
+
+// Toast function: slide in from right, wait 3s, slide out
+function showToast() {
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+
+  toast.classList.add('show');
+
+  // Hide after 3 seconds
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000); // 3000ms = 3 seconds
+}
   </script>
 </body>
 </html>

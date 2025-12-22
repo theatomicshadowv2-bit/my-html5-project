@@ -8,6 +8,7 @@
 </head>
 <body>
 
+  <!-- HEADER - with "Shop" active -->
   <header>
     <div class="logo">NOIR</div>
     <button class="menu-toggle" aria-label="Open menu">☰</button>
@@ -20,6 +21,7 @@
     </nav>
   </header>
 
+  <!-- MOBILE MENU -->
   <nav class="nav-mobile" id="navMenu">
     <button class="close-menu" aria-label="Close menu">×</button>
     <ul>
@@ -80,20 +82,17 @@
 
   <script>
     // Update cart count in header on every page
-  function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-    const cartLinks = document.querySelectorAll('a[href="cart.html"], a[href="cart.html"]'); // desktop + mobile
-    cartLinks.forEach(link => {
-      link.textContent = `Cart (${count})`;
-    });
-  }
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const cartLinks = document.querySelectorAll('a[href="cart.html"]');
+      cartLinks.forEach(link => {
+        link.textContent = `Cart (${count})`;
+      });
+    }
+    updateCartCount();
+    window.addEventListener('storage', updateCartCount);
 
-  // Call it immediately and after any cart change
-  updateCartCount();
-
-  // Optional: Listen for storage changes (if cart updated from another tab)
-  window.addEventListener('storage', updateCartCount);
     // Add-to-cart functionality
     document.addEventListener('click', (e) => {
       if (e.target.classList.contains('add-to-cart')) {
@@ -107,6 +106,7 @@
         cart.push(item);
         localStorage.setItem('cart', JSON.stringify(cart));
         alert('Added to cart!');
+        updateCartCount(); // Update count immediately after adding
       }
     });
 

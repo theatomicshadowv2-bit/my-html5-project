@@ -6,6 +6,7 @@
   <title>NOIR — Journal</title>
   <link rel="stylesheet" href="style.css">
 </head>
+  <div id="toast" class="toast">Added to cart!</div>
 <body>
 
   <!-- HEADER - with "Journal" active -->
@@ -55,6 +56,38 @@
   </footer>
 
   <script>
+    // Add-to-cart functionality with sliding toast
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('add-to-cart')) {
+    const item = {
+      name: e.target.dataset.name,
+      description: e.target.dataset.description,
+      price: parseFloat(e.target.dataset.price),
+      quantity: 1
+    };
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    cart.push(item);
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Show the sliding toast
+    showToast();
+
+    updateCartCount(); // Update header cart count
+  }
+});
+
+// Toast function: slide in from right, wait 3s, slide out
+function showToast() {
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+
+  toast.classList.add('show');
+
+  // Hide after 3 seconds
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000); // 3000ms = 3 seconds
+}
     // Update cart count in header on every page
     function updateCartCount() {
       const cart = JSON.parse(localStorage.getItem('cart') || '[]');

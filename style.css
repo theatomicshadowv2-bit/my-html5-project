@@ -388,3 +388,21 @@ footer p {
   font-weight: 600;
   color: var(--text);
 }
+.background-slideshow {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+}

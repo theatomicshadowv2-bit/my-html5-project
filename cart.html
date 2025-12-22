@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-//force redeploy
+
   <!-- HEADER -->
   <header>
     <div class="logo">NOIR</div>
@@ -137,44 +137,36 @@
       return card;
     }
 
-    // Event listeners for remove, save/move, quantity change
+    // Unified click handler for all buttons
     document.addEventListener('click', (e) => {
-      if (e.target.classList.contains('remove')) {
-        const index = e.target.dataset.index;
-        const isSaved = e.target.dataset.saved === 'true';
-        let cart = JSON.parse(localStorage.getItem(isSaved ? 'saved' : 'cart') || '[]');
-        cart.splice(index, 1);
-        localStorage.setItem(isSaved ? 'saved' : 'cart', JSON.stringify(cart));
-        loadCart();
-      } else if (e.target.classList.contains('save-later')) {
-        const index = e.target.dataset.index;
-        const isSaved = e.target.dataset.saved === 'true';
-        let cart = JSON.parse(localStorage.getItem(isSaved ? 'saved' : 'cart') || '[]');
-        let saved = JSON.parse(localStorage.getItem(isSaved ? 'cart' : 'saved') || '[]');
-        const item = cart.splice(index, 1)[0];
-        saved.push(item);
-        localStorage.setItem(isSaved ? 'cart' : 'saved', JSON.stringify(cart));
-        localStorage.setItem(isSaved ? 'saved' : 'cart', JSON.stringify(saved));
-        loadCart();
-      } else if (e.target.classList.contains('qty-btn')) {
-        const index = e.target.dataset.index;
-        const isSaved = e.target.dataset.saved === 'true';
-        const action = e.target.classList.contains('plus') ? 'plus' : 'minus';
+      const isSaved = e.target.dataset.saved === 'true';
+      const index = e.target.dataset.index;
+      let cartKey = isSaved ? 'saved' : 'cart';
+      let otherKey = isSaved ? 'cart' : 'saved';
+      let cart = JSON.parse(localStorage.getItem(cartKey) || '[]');
 
-        let cart = JSON.parse(localStorage.getItem(isSaved ? 'saved' : 'cart') || '[]');
+      if (e.target.classList.contains('remove')) {
+        cart.splice(index, 1);
+      } else if (e.target.classList.contains('save-later')) {
+        const item = cart.splice(index, 1)[0];
+        let other = JSON.parse(localStorage.getItem(otherKey) || '[]');
+        other.push(item);
+        localStorage.setItem(otherKey, JSON.stringify(other));
+      } else if (e.target.classList.contains('qty-btn')) {
+        const action = e.target.classList.contains('plus') ? 'plus' : 'minus';
         if (action === 'plus') {
           cart[index].quantity += 1;
         } else if (action === 'minus') {
           if (cart[index].quantity > 1) {
             cart[index].quantity -= 1;
           } else {
-            // If quantity would go to 0, remove the item
-            cart.splice(index, 1);
+            cart.splice(index, 1); // Quantity 0 = remove
           }
         }
-        localStorage.setItem(isSaved ? 'saved' : 'cart', JSON.stringify(cart));
-        loadCart();
       }
+
+      localStorage.setItem(cartKey, JSON.stringify(cart));
+      loadCart();
     });
 
     document.getElementById('checkout').addEventListener('click', () => {

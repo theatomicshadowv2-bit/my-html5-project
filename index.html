@@ -33,16 +33,16 @@
     </ul>
   </nav>
 
-  <!-- Full-screen background slideshow -->
+  <!-- Full-screen background slideshow with your images -->
   <div class="background-slideshow">
-    <div class="slide active" style="background-image: url('https://ibb.co/JWyMK2qD');"></div>
-    <div class="slide" style="background-image: url('https://ibb.co/jnphYY1');"></div>
+    <div class="slide active" style="background-image: url('https://i.ibb.co/JWyMK2qD/1.jpg');"></div>
+    <div class="slide" style="background-image: url('https://i.ibb.co/jnphYY1/2.jpg');"></div>
   </div>
 
   <main>
     <section class="hero">
       <h1>NOIR</h1>
-      <p>Just Try It</p>
+      <p>Timeless monochrome essentials</p>
       <a href="#products" class="btn">Shop Now</a>
     </section>
 
@@ -90,7 +90,7 @@
   <div id="toast" class="toast">Added to cart!</div>
 
   <script>
-    // Background slideshow
+    // Background slideshow with your 2 images
     const slides = document.querySelectorAll('.slide');
     let currentSlide = 0;
 
@@ -100,9 +100,10 @@
       slides[currentSlide].classList.add('active');
     }
 
-    // Change every 45 seconds
+    // Cycle every 45 seconds
     setInterval(showNextSlide, 45000);
 
+    // ... rest of your script (cart count, add-to-cart, header scroll, menu, animations) ...
     // Update cart count in header on every page
     function updateCartCount() {
       const cart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -133,7 +134,6 @@
       }
     });
 
-    // Toast function
     function showToast() {
       const toast = document.getElementById('toast');
       if (!toast) return;

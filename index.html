@@ -33,7 +33,7 @@
     </ul>
   </nav>
 
-  <!-- Full-screen background slideshow with slow scroll effect -->
+  <!-- Full-screen background slideshow -->
   <div class="background-slideshow">
     <div class="slide active" style="background-image: url('https://i.ibb.co/JWyMK2qD/1.jpg');"></div>
     <div class="slide" style="background-image: url('https://i.ibb.co/jnphYY1/2.jpg');"></div>
@@ -91,7 +91,7 @@
   <div id="toast" class="toast">Added to cart!</div>
 
   <script>
-    // Background slideshow
+    // Background slideshow - cycle every 5 seconds
     const slides = document.querySelectorAll('.slide');
     let currentSlide = 0;
 
@@ -101,9 +101,11 @@
       slides[currentSlide].classList.add('active');
     }
 
-    setInterval(showNextSlide, 45000); // 45 seconds
+    // Change every 5 seconds (5000ms)
+    setInterval(showNextSlide, 5000);
 
-    // Update cart count in header
+    // ... rest of your script (cart count, add-to-cart, header scroll, menu, animations) ...
+    // Update cart count in header on every page
     function updateCartCount() {
       const cart = JSON.parse(localStorage.getItem('cart') || '[]');
       const count = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -115,7 +117,7 @@
     updateCartCount();
     window.addEventListener('storage', updateCartCount);
 
-    // Add-to-cart with toast
+    // Add-to-cart functionality with sliding toast
     document.addEventListener('click', (e) => {
       if (e.target.classList.contains('add-to-cart')) {
         const item = {
@@ -127,6 +129,7 @@
         let cart = JSON.parse(localStorage.getItem('cart') || '[]');
         cart.push(item);
         localStorage.setItem('cart', JSON.stringify(cart));
+
         showToast();
         updateCartCount();
       }

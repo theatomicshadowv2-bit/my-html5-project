@@ -420,3 +420,9 @@ footer p {
 .background-slideshow {
   perspective: 1px; /* Optional: enhances parallax feel */
 }
+.background-slideshow .slide {
+  background-attachment: fixed; /* Parallax slow scroll effect */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

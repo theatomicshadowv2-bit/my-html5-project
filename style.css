@@ -406,3 +406,17 @@ footer p {
 .slide.active {
   opacity: 1;
 }
+
+/* Slow scroll effect on background images */
+.background-slideshow .slide {
+  background-attachment: fixed; /* This creates the slow parallax scroll */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: opacity 2s ease-in-out; /* Fade transition */
+}
+
+/* Optional: Adjust speed by changing background-position on scroll (more advanced) */
+.background-slideshow {
+  perspective: 1px; /* Optional: enhances parallax feel */
+}

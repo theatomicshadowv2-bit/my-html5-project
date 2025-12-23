@@ -33,13 +33,12 @@
     </ul>
   </nav>
 
-  <!-- Full-screen background slideshow with your images -->
- <!-- Full-screen background slideshow with your images -->
-<div class="background-slideshow">
-  <div class="slide active" style="background-image: url('https://i.ibb.co/JWyMK2qD/1.jpg');"></div>
-  <div class="slide" style="background-image: url('https://i.ibb.co/jnphYY1/2.jpg');"></div>
-  <div class="slide" style="background-image: url('https://i.ibb.co/j9YQ4jbS/3.jpg');"></div>
-</div>
+  <!-- Full-screen background slideshow with slow scroll effect -->
+  <div class="background-slideshow">
+    <div class="slide active" style="background-image: url('https://i.ibb.co/JWyMK2qD/1.jpg');"></div>
+    <div class="slide" style="background-image: url('https://i.ibb.co/jnphYY1/2.jpg');"></div>
+    <div class="slide" style="background-image: url('https://i.ibb.co/j9YQ4jbS/3.jpg');"></div>
+  </div>
 
   <main>
     <section class="hero">
@@ -92,7 +91,7 @@
   <div id="toast" class="toast">Added to cart!</div>
 
   <script>
-    // Background slideshow with your 2 images
+    // Background slideshow
     const slides = document.querySelectorAll('.slide');
     let currentSlide = 0;
 
@@ -102,11 +101,9 @@
       slides[currentSlide].classList.add('active');
     }
 
-    // Cycle every 45 seconds
-    setInterval(showNextSlide, 45000);
+    setInterval(showNextSlide, 45000); // 45 seconds
 
-    // ... rest of your script (cart count, add-to-cart, header scroll, menu, animations) ...
-    // Update cart count in header on every page
+    // Update cart count in header
     function updateCartCount() {
       const cart = JSON.parse(localStorage.getItem('cart') || '[]');
       const count = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -118,7 +115,7 @@
     updateCartCount();
     window.addEventListener('storage', updateCartCount);
 
-    // Add-to-cart functionality with sliding toast
+    // Add-to-cart with toast
     document.addEventListener('click', (e) => {
       if (e.target.classList.contains('add-to-cart')) {
         const item = {
@@ -130,7 +127,6 @@
         let cart = JSON.parse(localStorage.getItem('cart') || '[]');
         cart.push(item);
         localStorage.setItem('cart', JSON.stringify(cart));
-
         showToast();
         updateCartCount();
       }
